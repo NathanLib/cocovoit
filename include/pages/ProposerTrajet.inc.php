@@ -46,6 +46,8 @@ $tableauVille = $villeManager->getAllVilles();
                 </select>
             </div>
 
+            <p>coucou</p>
+
             <div class="">
                 <label for="">Date de départ : </label>
                 <input type="date" name="pro_date" value="<?php echo date("Y-m-d"); ?>" required>
