@@ -65,4 +65,25 @@ class ParcoursManager{
 			return $listeVilleDispo;
 			$requete->closeCursor();
 		}
+
+		//Cette fonction permet d'obtenir le numéro et le sens d'un parcours
+		//dont on donne la ville de départ et la ville d'arrivée en paramètres
+		public function getParcours($numVilleDepart, $numVilleArrivee){
+			$requete = $this->db->prepare(
+				'SELECT par_num, 0 as pro_sens FROM parcours
+				WHERE (vil_num1 = :numDepart AND vil_num2 = :numArrivee)
+				UNION
+				SELECT par_num, 1 as pro_sens FROM parcours
+				WHERE (vil_num1 = :numArrivee AND vil_num2 = :numDepart)'
+			);
+			$requete->bindValue(':numDepart', $numVilleDepart);
+			$requete->bindValue(':numArrivee', $numVilleArrivee);
+
+			$requete->execute();
+
+			$monParcours = $requete->fetch(PDO::FETCH_OBJ);
+
+			return $monParcours;
+			$requete->closeCursor();
+		}
 	}

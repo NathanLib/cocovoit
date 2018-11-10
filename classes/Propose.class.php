@@ -14,8 +14,8 @@ class Propose{
 		}
 	}
 
-	public function affecte($donnes) {
-		foreach($donnees as $attributs => $valeur) {
+	public function affecte($donnees) {
+		foreach($donnees as $attribut => $valeur) {
 			switch ($attribut) {
 				case 'par_num':
 				$this->setParNum($valeur);
@@ -70,7 +70,7 @@ class Propose{
 
 	//Getter et Setter de "pro_time"
 	public function getProTime() {
-		return $this->ProTime;
+		return $this->pro_time;
 	}
 	public function setProTime($id) {
 		$this->pro_time = $id;

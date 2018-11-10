@@ -55,15 +55,15 @@ class PersonneManager{
 
 		$requete->execute();
 
-        if($requete->rowCount() > 0) {
-                return true; // La personne existe
-        }
+		if($requete->rowCount() > 0) {
+			return true; // La personne existe
+		}
 		else {
 			return false; // Aucune donnée trouvée
 		}
 	}
 
-	//Cette fonction permet de savoir si une personne est étudiante à partir de son numéro 
+	//Cette fonction permet de savoir si une personne est étudiante à partir de son numéro
 	public function estEtudiant($idPersonne){
 		if(!is_null($idPersonne)){
 			$requete = $this->db->prepare('SELECT p.per_num FROM personne p INNER JOIN etudiant e ON p.per_num=e.per_num WHERE p.per_num = :per_num');
@@ -84,6 +84,19 @@ class PersonneManager{
 		$personne = $requete->fetch(PDO::FETCH_OBJ);
 
 		return new Personne($personne);
+		$requete->closeCursor();
+	}
+
+	public function getNumPersLog($login) {
+		$requete = $this->db->prepare(
+			'SELECT per_num FROM personne WHERE per_login = :login'
+		);
+		$requete->bindValue(':login', $login);
+		$requete->execute();
+
+		$result = $requete->fetch(PDO::FETCH_OBJ);
+
+		return $result->per_num;
 		$requete->closeCursor();
 	}
 }

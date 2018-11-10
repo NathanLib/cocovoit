@@ -1,6 +1,7 @@
 <?php
 $db = new myPdo();
 $manager = new ProposeManager($db);
+
 $villeManager = new VilleManager($db);
 $tableauVille = $villeManager->getAllVilles();
 ?>
@@ -25,7 +26,10 @@ $tableauVille = $villeManager->getAllVilles();
     <form class="Formulaire" action="#" method="post">
         <div class="">
             <label for="">Ville de départ :</label>
-            <?php echo $villeManager->getVilNomId($_POST['vil_num1']); ?>
+            <?php
+            echo $villeManager->getVilNomId($_POST['vil_num1']);
+            $_SESSION['villeDepart'] = $_POST['vil_num1'];
+            ?>
         </div>
 
         <div class="">
@@ -45,18 +49,18 @@ $tableauVille = $villeManager->getAllVilles();
 
         <div class="">
             <label for="">Date de départ : </label>
-            <input type="date" name="pro_date" value="<?php echo date("Y-m-d"); ?>" required>
+            <input type="date" name="pro_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?php echo date("Y-m-d"); ?>" required>
         </div>
 
         <div class="">
             <label for="">Heure de départ : </label>
-            <input type="time" name="pro_time" value="<?php echo date("h:i"); ?>" required>
+            <input type="time" name="pro_time" pattern="[0-9]{2}:[0-9]{2}" value="<?php echo date("H:i"); ?>" required>
 
         </div>
 
         <div class="">
             <label for="">Nombre de place : </label>
-            <input type="number" name="" value="" min="1" required>
+            <input type="number" name="pro_place" value="" min="1" required>
         </div>
 
         <input class="BoutonValider" type="submit" value="Valider">
@@ -65,5 +69,16 @@ $tableauVille = $villeManager->getAllVilles();
     <?php
 } else {
     $propose = new Propose($_POST);
+
+    $parcoursManager = new ParcoursManager($db);
+    $monParcours = $parcoursManager->getParcours($_SESSION['villeDepart'], $_POST['vil_num2']);
+
+    $propose->setParNum($monParcours->par_num);
+    $propose->setProSens($monParcours->pro_sens);
+
+    $personneManager = new PersonneManager($db);
+    $numPers = $personneManager->getNumPersLog($_SESSION['login']);
+    $propose->setPerNum($numPers);
+
     $manager->add($propose);
 }
