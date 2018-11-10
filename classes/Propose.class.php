@@ -18,27 +18,27 @@ class Propose{
 		foreach($donnees as $attributs => $valeur) {
 			switch ($attribut) {
 				case 'par_num':
-				$this->setParNum($valeur)
+				$this->setParNum($valeur);
 				break;
 
 				case 'per_num':
-				$this->setPerNum($valeur)
+				$this->setPerNum($valeur);
 				break;
 
 				case 'pro_date':
-				$this->setProDate($valeur)
+				$this->setProDate($valeur);
 				break;
 
 				case 'pro_time':
-				$this->setProTime($valeur)
+				$this->setProTime($valeur);
 				break;
 
 				case 'pro_place':
-				$this->setProPlace($valeur)
+				$this->setProPlace($valeur);
 				break;
 
 				case 'pro_sens':
-				$this->setProSens($valeur)
+				$this->setProSens($valeur);
 				break;
 			}
 		}

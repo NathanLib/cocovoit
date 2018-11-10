@@ -3,7 +3,7 @@ class ProposeManager{
 	private $db;
 
 	public function __construct($db) {
-		$this6>db = $db;
+		$this->db = $db;
 	}
 
 	public function add($propose) {
