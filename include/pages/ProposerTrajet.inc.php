@@ -27,7 +27,7 @@ $tableauVille = $villeManager->getAllVilles();
             <label for="">Ville de départ :</label>
             <?php
             echo $villeManager->getVilNomId($_POST['vil_num1']);
-            $_SESSION['villeDepart'] = $_POST['vil_num1'];
+            $_SESSION['numVilleDepart'] = $_POST['vil_num1'];
             ?>
         </div>
 
@@ -70,7 +70,7 @@ $tableauVille = $villeManager->getAllVilles();
     $propose = new Propose($_POST);
 
     $parcoursManager = new ParcoursManager($db);
-    $monParcours = $parcoursManager->getParcours($_SESSION['villeDepart'], $_POST['vil_num2']);
+    $monParcours = $parcoursManager->getParcours($_SESSION['numVilleDepart'], $_POST['vil_num2']);
 
     $propose->setParNum($monParcours->par_num);
     $propose->setProSens($monParcours->pro_sens);
@@ -81,5 +81,11 @@ $tableauVille = $villeManager->getAllVilles();
 
     $manager->add($propose);
 
-    ?> <p><img src="image/valid.png" alt="valide" title="valide"> Le trajet a été ajoutée à la liste des propostitions ! </p> <?php
+    ?>
+    <p>
+        <img src="image/valid.png" alt="valide" title="valide">
+        Le trajet a été ajoutée à la liste des propostitions !
+    </p>
+    <?php
+    unset($_SESSION['numVilleDepart']);
 }
