@@ -22,7 +22,6 @@ $tableauVille = $villeManager->getAllVilles();
     </form>
 <?php } elseif (!empty($_POST['vil_num1']) && empty($_POST['vil_num2'])) {
     ?>
-
     <form class="Formulaire" action="#" method="post">
         <div class="">
             <label for="">Ville de départ :</label>
@@ -49,12 +48,12 @@ $tableauVille = $villeManager->getAllVilles();
 
         <div class="">
             <label for="">Date de départ : </label>
-            <input type="date" name="pro_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?php echo date("Y-m-d"); ?>" required>
+            <input type="date" name="pro_date" value="<?php echo date("Y-m-d"); ?>" required>
         </div>
 
         <div class="">
             <label for="">Heure de départ : </label>
-            <input type="time" name="pro_time" pattern="[0-9]{2}:[0-9]{2}" value="<?php echo date("H:i"); ?>" required>
+            <input type="time" name="pro_time" value="<?php echo date("H:i"); ?>" required>
 
         </div>
 
@@ -81,4 +80,6 @@ $tableauVille = $villeManager->getAllVilles();
     $propose->setPerNum($numPers);
 
     $manager->add($propose);
+
+    ?> <p><img src="image/valid.png" alt="valide" title="valide"> Le trajet a été ajoutée à la liste des propostitions ! </p> <?php
 }
