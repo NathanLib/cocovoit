@@ -19,29 +19,28 @@ class SalarieManager{
 		return $retour;
 	}
 
-	//Fonction qui permet d'avoir le département d'un étudiant
-	//à partir du numéro de ce dernier
-	public function getFonctionId($id){
-		$sql = $this->db->prepare('SELECT * FROM salarie WHERE per_num='.$id);
-
-		$sql->bindValue(':num',$id,PDO::PARAM_STR);
-		$sql->execute();
-
-		return $villeManager->getFonctionId2($sql)['fon_nom'];
+	//Cette fonction permet de modifier la fonction et le numéro de 
+	//téléphone proffessionnel d'un salarié
+	public function updateSalarie($id, $idFon, $sal_telprof){
+		if(isset($personne)){
+			$requete = $this->db->prepare(
+				'UPDATE salarie SET fon_num=:fon_num, sal_telprof=:sal_telprof WHERE per_num=:per_num'
+			);
+			$requete->bindValue(':per_num', $id, PDO::PARAM_STR);
+			$requete->bindValue(':fon_num', $idDiv, PDO::PARAM_STR);
+			$requete->bindValue(':sal_telprof', $sal_telprof, PDO::PARAM_STR);
+			return $requete->execute();
+		}
 	}
 
-	public function updateSalarie(){
-		$requete = $this->db->prepare(
-			'UPDATE salarie SET sal_telprof=:sal_telprof, fon_num=:fon_num)'
-		);
+	//Fonction qui permet d'avoir un salarie
+	//à partir du numéro de ce dernier
+	public function getSalarieId($id){
+		$requete = $this->db->prepare('SELECT * FROM salarie WHERE per_num = :per_num');
+		$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
+		$requete->execute();
 
-		$requete->bindValue(':per_nom', $personne->getPerNom(), PDO::PARAM_STR);
-		//$requete->bindValue(':per_prenom', $personne->getPerPrenom(), PDO::PARAM_STR);
-		$requete->bindValue(':per_tel',$personne->getPerTel(), PDO::PARAM_STR);
-		$requete->bindValue(':per_mail', $personne->getPerMail(), PDO::PARAM_STR);
-		$requete->bindValue(':per_login', $personne->getPerLogin(), PDO::PARAM_STR);
-		$requete->bindValue(':per_pwd', $personne->getPerPwd(), PDO::PARAM_STR);
-
-		return $requete->execute(); 
+		$retour = $requete->fetch(PDO::FETCH_OBJ);
+		return new Salarie($retour);
 	}
 }

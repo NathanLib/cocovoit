@@ -2,7 +2,7 @@
 class Personne{
 	//Attributs
 	private $per_nom;
-	private $per_prenoms;
+	private $per_prenom;
 	private $per_tel;
 	private $per_mail;
 	private $per_login;

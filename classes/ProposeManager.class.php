@@ -22,7 +22,8 @@ class ProposeManager{
 		return $retour;
 	}
 
-	//Fonction pour supprimer une  personne
+	//Fonction pour supprimer une  tous les trajets 
+	//proposé par une personne
 	public function supprimerPropose($id){
 
 		$requete = $this->db->prepare('DELETE FROM propose WHERE per_num = :per_num');

@@ -10,35 +10,35 @@ if(!isset($_SESSION['nouvellePersonne'])) {
 		<h1>Ajouter une personne</h1>
 
 		<form class="Formulaire" action="#" method="post">
-				<div class="LB">
-					<label> Nom : </label>
-					<input type="text" name="per_nom" value="" required>
-				</div>
-		
-				<div class="LB">
-					<label> Prenom : </label>
-					<input type="text" name="per_prenom" value="" required>
-				</div>
+			<div class="LB">
+				<label> Nom : </label>
+				<input type="text" name="per_nom" value="" required>
+			</div>
+			
+			<div class="LB">
+				<label> Prenom : </label>
+				<input type="text" name="per_prenom" value="" required>
+			</div>
 
-				<div class="LB">
-					<label> Téléphone : </label>
-					<input type="tel" name="per_tel" value="" pattern="(01|02|03|04|05|06|07|08|09)[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}" title="Téléphone au format 06.00.00.00.00 ou 0600000000" required>
-				</div>
+			<div class="LB">
+				<label> Téléphone : </label>
+				<input type="tel" name="per_tel" value="" pattern="(01|02|03|04|05|06|07|08|09)[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}" title="Téléphone au format 06.00.00.00.00 ou 0600000000" required>
+			</div>
 
-				<div class="LB">
-					<label> Email : </label>
-					<input type="mail" name="per_mail" value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
-				</div>
+			<div class="LB">
+				<label> Email : </label>
+				<input type="mail" name="per_mail" value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+			</div>
 
-				<div class="LB">
-					<label> Login : </label>
-					<input type="text" name="per_login" value="" pattern="[A-Za-z0-9]+" title="Lettres et nombres seulement, pas de ponctuation ou de caractère sécial" required>
-				</div>
-				
-				<div class="LB">
-					<label> Mot de passe : </label>
-					<input type="password" name="per_pwd" value="" pattern="[A-Za-z0-9]+" title="Lettres et nombres seulement, pas de ponctuation ou de caractère sécial" required>
-				</div>
+			<div class="LB">
+				<label> Login : </label>
+				<input type="text" name="per_login" value="" pattern="[A-Za-z0-9]+" title="Lettres et nombres seulement, pas de ponctuation ou de caractère sécial" required>
+			</div>
+			
+			<div class="LB">
+				<label> Mot de passe : </label>
+				<input type="password" name="per_pwd" value="" pattern="[A-Za-z0-9]+" title="Lettres et nombres seulement, pas de ponctuation ou de caractère sécial" required>
+			</div>
 
 			<div>
 				<b class="CAT">Catégorie :</b>

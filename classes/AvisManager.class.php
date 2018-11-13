@@ -5,7 +5,8 @@ class AvisManager{
         $this->db = $db;
     }
 		
-	//Fonction pour supprimer une  personne
+	//Fonction pour supprimer tous les avis 
+	//laissés par une personne
 	public function supprimerAvis($id){
 		
 		$requete = $this->db->prepare('DELETE FROM avis WHERE per_num = :per_num');

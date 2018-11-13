@@ -27,7 +27,7 @@ class DepartementManager{
         return new Departement($retour);
     }
 
-    //Fonction qui permet d'avoir la fonction d'un salarié
+    //Fonction qui permet d'avoir le département d'un étudiant
     //à partir du numéro de fonction
     public function getDepartementNomId($id){
         $requete = $this->db->prepare('SELECT * FROM departement WHERE dep_num=:dep_num');
