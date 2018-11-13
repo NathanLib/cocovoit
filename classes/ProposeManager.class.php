@@ -58,4 +58,21 @@ class ProposeManager{
 		return $rechercheVilleDepart;
 		$requete->closeCursor();
 	}
+
+	public function getVilleArrivee($numVilleDepart) {
+		$requete=$this->db->prepare(
+			'SELECT vil.vil_num, vil.vil_nom FROM ville vil INNER JOIN  parcours par ON par.vil_num2=vil.vil_num WHERE par.vil_num1=:numVilleDepart'
+		);
+		$requete->bindValue(':numVilleDepart',$numVilleDepart,PDO::PARAM_STR);
+		$requete->execute();
+
+		while ($ville = $requete->fetch(PDO::FETCH_OBJ)) {
+			$rechercheVilleArrivee[] = new Ville($ville);
+		}
+
+		return $rechercheVilleArrivee;
+		$requete->closeCursor();
+
+
+	}
 }
