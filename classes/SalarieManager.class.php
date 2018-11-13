@@ -29,4 +29,19 @@ class SalarieManager{
 
 		return $villeManager->getFonctionId2($sql)['fon_nom'];
 	}
+
+	public function updateSalarie(){
+		$requete = $this->db->prepare(
+			'UPDATE salarie SET sal_telprof=:sal_telprof, fon_num=:fon_num)'
+		);
+
+		$requete->bindValue(':per_nom', $personne->getPerNom(), PDO::PARAM_STR);
+		//$requete->bindValue(':per_prenom', $personne->getPerPrenom(), PDO::PARAM_STR);
+		$requete->bindValue(':per_tel',$personne->getPerTel(), PDO::PARAM_STR);
+		$requete->bindValue(':per_mail', $personne->getPerMail(), PDO::PARAM_STR);
+		$requete->bindValue(':per_login', $personne->getPerLogin(), PDO::PARAM_STR);
+		$requete->bindValue(':per_pwd', $personne->getPerPwd(), PDO::PARAM_STR);
+
+		return $requete->execute(); 
+	}
 }

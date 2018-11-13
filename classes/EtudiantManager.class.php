@@ -19,16 +19,14 @@ class EtudiantManager{
 		return $retour;
 	}
 
-	//Fonction qui permet d'avoir le département d'un étudiant
+	//Fonction qui permet d'avoir un étudiant
 	//à partir du numéro de ce dernier
-	public function getDepartementId($id){
-		$db = new myPdo();
-		$DepartementManager = new DepartementManager($db);
-		$sql = $this->db->prepare('SELECT * FROM etudiant WHERE per_num='.$id);
+	public function getEtudiantId($id){
+		$requete = $this->db->prepare('SELECT * FROM etudiant WHERE per_num = :per_num');
+		$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
+		$requete->execute();
 
-		$sql->bindValue(':num',$id,PDO::PARAM_STR);
-		$sql->execute();
-
-		return $DepartementManager->getDepartementId2($sql)['dep_nom'];
+		$retour = $requete->fetch(PDO::FETCH_OBJ);
+		return new Etudiant($retour);
 	}
 }
