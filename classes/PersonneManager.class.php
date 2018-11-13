@@ -76,6 +76,8 @@ class PersonneManager{
 		}
 	}
 
+
+	//cette fonction permet de récupérer un étudiant à partir du numéro de ce dernier
 	public function getPerByID($id){
 		$requete = $this->db->prepare("SELECT * FROM personne WHERE per_num = :per_num");
 
@@ -103,35 +105,35 @@ class PersonneManager{
 	//Fonction pour supprimer une  personne
 	public function supprimerPersonne($id){
 
-			if($this->estEtudiant($id)){
-				$requete = $this->db->prepare('DELETE FROM etudiant WHERE per_num = :per_num');
-			} else {
-				$requete = $this->db->prepare('DELETE FROM salarie WHERE per_num = :per_num');
-			}
-			$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
-			$requete->execute();
+		if($this->estEtudiant($id)){
+			$requete = $this->db->prepare('DELETE FROM etudiant WHERE per_num = :per_num');
+		} else {
+			$requete = $this->db->prepare('DELETE FROM salarie WHERE per_num = :per_num');
+		}
+		$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
+		$requete->execute();
 
-			$requete = $this->db->prepare('DELETE FROM personne WHERE per_num = :per_num');
-			$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
+		$requete = $this->db->prepare('DELETE FROM personne WHERE per_num = :per_num');
+		$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
 
-			return $requete->execute();
+		return $requete->execute();
 	}
 
 	//Fonction qui modifie une personne
 	public function updatePersonne($id, $personne) {
 		if(isset($personne)){
-		$requete = $this->db->prepare(
-			'UPDATE personne SET per_nom=:per_nom, per_prenom=:per_prenom, per_tel=:per_tel, per_mail=:per_mail, per_login=:per_login, per_pwd=:per_pwd WHERE per_num=:per_num'
-		);
-		$requete->bindValue(':per_num', $id, PDO::PARAM_STR);
-		$requete->bindValue(':per_nom', $personne->getPerNom(), PDO::PARAM_STR);
-		$requete->bindValue(':per_prenom', $personne->getPerPrenom(), PDO::PARAM_STR);
-		$requete->bindValue(':per_tel',$personne->getPerTel(), PDO::PARAM_STR);
-		$requete->bindValue(':per_mail', $personne->getPerMail(), PDO::PARAM_STR);
-		$requete->bindValue(':per_login', $personne->getPerLogin(), PDO::PARAM_STR);
-		$requete->bindValue(':per_pwd', $personne->getPerPwd(), PDO::PARAM_STR);
+			$requete = $this->db->prepare(
+				'UPDATE personne SET per_nom=:per_nom, per_prenom=:per_prenom, per_tel=:per_tel, per_mail=:per_mail, per_login=:per_login, per_pwd=:per_pwd WHERE per_num=:per_num'
+			);
+			$requete->bindValue(':per_num', $id, PDO::PARAM_STR);
+			$requete->bindValue(':per_nom', $personne->getPerNom(), PDO::PARAM_STR);
+			$requete->bindValue(':per_prenom', $personne->getPerPrenom(), PDO::PARAM_STR);
+			$requete->bindValue(':per_tel',$personne->getPerTel(), PDO::PARAM_STR);
+			$requete->bindValue(':per_mail', $personne->getPerMail(), PDO::PARAM_STR);
+			$requete->bindValue(':per_login', $personne->getPerLogin(), PDO::PARAM_STR);
+			$requete->bindValue(':per_pwd', $personne->getPerPwd(), PDO::PARAM_STR);
 
-		return $requete->execute();
-	}
+			return $requete->execute();
+		}
 	}
 }

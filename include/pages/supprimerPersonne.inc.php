@@ -14,9 +14,9 @@ $tableauPersonne = $PersManager -> getAllPersonnes();
 
 		<label> Nom : </label>
 		<select class="" name="per_num" required>
-		    <?php foreach ($tableauPersonne as $pers): ?>
-		        <option value="<?php echo $pers->getPerNum() ?>"><?php echo $pers->getPerNom().' '.$pers->getPerPrenom(); ?></option>
-		    <?php endforeach; ?>
+			<?php foreach ($tableauPersonne as $pers): ?>
+				<option value="<?php echo $pers->getPerNum() ?>"><?php echo $pers->getPerNom().' '.$pers->getPerPrenom(); ?></option>
+			<?php endforeach; ?>
 		</select>
 		<input class="BoutonValider" type="submit" value="Supprimer">
 	</form>
@@ -24,18 +24,18 @@ $tableauPersonne = $PersManager -> getAllPersonnes();
 	$suppression = $AvisManager -> supprimerAvis($_POST["per_num"]);
 	$suppression = $PropManager -> supprimerPropose($_POST["per_num"]);
 	$suppression = $PersManager -> supprimerPersonne($_POST["per_num"]);
-    if ($suppression ) {  ?>
-        <p>
-        	<img src="image/valid.png" alt="valide" title="valide"> 
-        	La personne a bien été supprimée ! 
-        </p>
-	
+	if ($suppression ) {  ?>
+		<p>
+			<img src="image/valid.png" alt="valide" title="valide"> 
+			La personne a bien été supprimée ! 
+		</p>
+		
 	<?php } else { ?> 
-    
-        <p>
-            <img src="image/erreur.png" alt="erreur" title="erreur"> 
-            Erreur dans la suppression de la personne !
-        </p>
-    <?php } 
+		
+		<p>
+			<img src="image/erreur.png" alt="erreur" title="erreur"> 
+			Erreur dans la suppression de la personne !
+		</p>
+	<?php } 
 }?>
 
