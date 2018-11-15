@@ -22,7 +22,7 @@ class ProposeManager{
 		return $retour;
 	}
 
-	//Fonction pour supprimer une  tous les trajets 
+	//Fonction pour supprimer une  tous les trajets
 	//proposé par une personne
 	public function supprimerPropose($id){
 
@@ -73,7 +73,7 @@ class ProposeManager{
 
 		return $rechercheVilleArrivee;
 		$requete->closeCursor();
-
-
 	}
+
+	/* SELECT par.vil_num1 AS ville_depart, par.vil_num2 AS ville_arrivee, pro.pro_date, pro.pro_time, pro.pro_place, per.per_nom, per.per_prenom FROM propose pro JOIN parcours par ON par.par_num = pro.par_num JOIN personne per ON per.per_num=pro.per_num WHERE par.vil_num1=7 AND par.vil_num2=5 AND pro.pro_date BETWEEN '2018/12/29' AND '2018/12/30' AND pro.pro_sens=0 */
 }
