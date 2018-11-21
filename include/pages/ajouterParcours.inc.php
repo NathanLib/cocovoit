@@ -9,10 +9,11 @@ $tableauVille = $villeManager->getAllVilles();
 <h1>Ajouter un parcours</h1>
 
 <?php if(empty($_POST["vil_num1"]) && empty($_POST["vil_num2"]) && empty($_POST["par_km"])) { ?>
-    <form class="" action="#" method="post">
+    <form action="#" method="post">
         <p>
             <label> Ville 1 : </label>
-            <select class="" name="vil_num1" required>
+            <select name="vil_num1" required>
+                <option value="">Choisir ville</option>
                 <?php foreach ($tableauVille as $ville): ?>
                     <option value="<?php echo $ville->getVilNum() ?>"><?php echo $ville->getVilNom() ?></option>
                 <?php endforeach; ?>
@@ -20,6 +21,7 @@ $tableauVille = $villeManager->getAllVilles();
 
             <label> Ville 2 : </label>
             <select class="" name="vil_num2" required>
+                <option value="">Choisir ville</option>
                 <?php foreach ($tableauVille as $ville): ?>
                     <option value="<?php echo $ville->getVilNum() ?>"><?php echo $ville->getVilNom() ?></option>
                 <?php endforeach; ?>

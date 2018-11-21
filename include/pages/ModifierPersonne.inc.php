@@ -8,7 +8,8 @@ $tableauPersonne = $manager -> getAllPersonnes();
 		<h1>Modifier une personne</h1>
 
 		<label> Nom : </label>
-		<select class="" name="per_num" required>
+		<select name="per_num" required>
+			<option value="">Choisir personne</option>
 			<?php foreach ($tableauPersonne as $pers): ?>
 				<option value="<?php echo $pers->getPerNum() ?>"><?php echo $pers->getPerNom().' '.$pers->getPerPrenom(); ?></option>
 			<?php endforeach; ?>
@@ -43,7 +44,7 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 
 		<div class="LB">
 			<label> Email : </label>
-			<input type="mail" name="per_mail" value="<?php  echo($personne -> getPerMail()); ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+			<input type="email" name="per_mail" value="<?php  echo($personne -> getPerMail()); ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
 		</div>
 
 		<div class="LB">
@@ -70,6 +71,7 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 
 			<div class="AjouterPersonne">
 				<label> Année : </label>
+				<option value="">Choisir année</option>
 				<select class="" name="div_num" required>
 					<?php foreach ($listeDivisions as $division): ?>
 						<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
@@ -79,6 +81,7 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 
 			<div class="AjouterPersonne">
 				<label> Département : </label>
+				<option value="">Choisir département</option>
 				<select class="" name="dep_num" required>
 					<?php foreach ($listeDepartements as $departement): ?>
 						<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
@@ -100,6 +103,7 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 
 			<div class="AjouterPersonne">
 				<label> Fonction : </label>
+				<option value="">Choisir département</option>
 				<select class="" name="fon_num" required>
 					<?php foreach ($listeFonctions as $fonction): ?>
 						<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>

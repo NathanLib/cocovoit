@@ -24,7 +24,7 @@ $nbPersonnes = $PersManager -> getNbPersonne();
 
 		<?php foreach ($tableauPersonne as $pers): ?>
 			<tr>
-				<td class="TableauLister"><a href="index.php?page=2&numPersClick=<?php echo $pers->getPerNum(); ?>"><b><?php echo $pers->getPerNum(); ?></a></b></td>
+				<td class="TableauLister"><a href="index.php?page=2&numPersClick=<?php echo $pers->getPerNum(); ?>"><b><?php echo $pers->getPerNum(); ?></b></a></td>
 				<td class="TableauLister"><?php echo $pers->getPerNom(); ?></td>
 				<td class="TableauLister"><?php echo $pers->getPerPrenom(); ?></td>
 			</tr>
