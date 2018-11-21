@@ -32,15 +32,13 @@ class EtudiantManager{
 
 
 	//cette fonction permet de modifier le départment et la division d'un étudiant
-	public function updateEtudiant($id, $idDiv, $idDep){
-		if(isset($personne)){
-			$requete = $this->db->prepare(
-				'UPDATE etudiant SET div_num=:div_num, dep_num=:dep_num WHERE per_num=:per_num'
-			);
-			$requete->bindValue(':per_num', $id, PDO::PARAM_STR);
-			$requete->bindValue(':div_num', $idDiv, PDO::PARAM_STR);
-			$requete->bindValue(':dep_num', $idDep, PDO::PARAM_STR);
-			return $requete->execute();
-		}
+	public function updateEtudiant($id, $etudiant){
+		$requete = $this->db->prepare(
+			'UPDATE etudiant SET div_num=:div_num, dep_num=:dep_num WHERE per_num=:per_num'
+		);
+		$requete->bindValue(':per_num', $id, PDO::PARAM_STR);
+		$requete->bindValue(':div_num', $etudiant->getDivNum(), PDO::PARAM_STR);
+		$requete->bindValue(':dep_num', $etudiant->getDepNum(), PDO::PARAM_STR);
+		return $requete->execute();
 	}
 }

@@ -21,16 +21,16 @@ class SalarieManager{
 
 	//Cette fonction permet de modifier la fonction et le numéro de 
 	//téléphone proffessionnel d'un salarié
-	public function updateSalarie($id, $idFon, $sal_telprof){
-		if(isset($personne)){
+	public function updateSalarie($id, $salarie){
 			$requete = $this->db->prepare(
-				'UPDATE salarie SET fon_num=:fon_num, sal_telprof=:sal_telprof WHERE per_num=:per_num'
+				'UPDATE salarie SET sal_telprof = :sal_telprof, fon_num = :fon_num WHERE per_num = :per_num'
 			);
-			$requete->bindValue(':per_num', $id, PDO::PARAM_STR);
-			$requete->bindValue(':fon_num', $idDiv, PDO::PARAM_STR);
-			$requete->bindValue(':sal_telprof', $sal_telprof, PDO::PARAM_STR);
+
+			$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
+			$requete->bindValue(':sal_telprof',$salarie->getSalTelProf(),PDO::PARAM_STR);
+			$requete->bindValue(':fon_num',$salarie->getFonNum(),PDO::PARAM_STR);
+
 			return $requete->execute();
-		}
 	}
 
 	//Fonction qui permet d'avoir un salarie

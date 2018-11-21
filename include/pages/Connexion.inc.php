@@ -6,14 +6,14 @@ $personneManager = new PersonneManager($db);
 <h1>Pour vous connecter</h1>
 
 <?php if (empty($_POST['captcha_result'])) { ?>
-    <form class="" action="#" method="post">
+    <form action="#" method="post">
         <div>
-            <label for="">Nom d'utilisateur : </label>
+            <label>Nom d'utilisateur : </label>
             <input type="text" name="per_login" value="" required>
         </div>
 
         <div>
-            <label for="">Mot de passe : </label>
+            <label>Mot de passe : </label>
             <input type="password" name="per_pwd" value="" required>
         </div>
 

@@ -48,12 +48,11 @@ class VilleManager{
 	//Fonction qui permet d'avoir le nom d'une ville
 	//à partir du numéro de cette dernière
 	public function getVilNomId($id){
-		$sql = $this->db->prepare('SELECT * FROM ville WHERE vil_num='.$id);
-
-		$sql->bindValue(':num',$id,PDO::PARAM_STR);
-		$sql->execute();
-		$retour=$sql->fetch(PDO::FETCH_ASSOC);
-
+		$requete = $this->db->prepare('SELECT * FROM ville WHERE vil_num=:vil_num');
+		$requete->bindValue(':vil_num',$id,PDO::PARAM_STR);
+		$requete->execute();
+		
+		$retour=$requete->fetch(PDO::FETCH_ASSOC);
 		return $retour['vil_nom'];
 	}
 }

@@ -9,10 +9,10 @@ $tableauVille = $villeManager->getAllVilles();
 <h1>Proposer un trajet</h1>
 
 <?php if(empty($_POST["vil_num1"]) && empty($_POST['vil_num2'])) { ?>
-    <form class="" action="#" method="post">
+    <form action="#" method="post">
         <label> Ville de départ : </label>
-        <select class="" name="vil_num1" required>
-            <option value=""></option>
+        <select name="vil_num1" required>
+            <option value="">Choisir ville</option>
             <?php foreach ($tableauVille as $ville): ?>
                 <option value="<?php echo $ville->getVilNum() ?>"><?php echo $ville->getVilNom() ?></option>
             <?php endforeach; ?>
@@ -23,42 +23,42 @@ $tableauVille = $villeManager->getAllVilles();
 <?php } elseif (!empty($_POST['vil_num1']) && empty($_POST['vil_num2'])) {
     ?>
     <form class="Formulaire" action="#" method="post">
-        <div class="">
-            <label for="">Ville de départ :</label>
+        <div>
+            <label>Ville de départ :</label>
             <?php
             echo $villeManager->getVilNomId($_POST['vil_num1']);
             $_SESSION['numVilleDepart'] = $_POST['vil_num1'];
             ?>
         </div>
 
-        <div class="">
+        <div>
             <?php
             $parcoursManager = new ParcoursManager($db);
             $tableauVilleDispo = $parcoursManager->getVilleDispo($_POST['vil_num1']);
             ?>
 
-            <label for="">Ville d'arrivée : </label>
-            <select class="" name="vil_num2" required>
-                <option value=""></option>
+            <label>Ville d'arrivée : </label>
+            <select name="vil_num2" required>
+                <option value="">Choisir ville</option>
                 <?php foreach ($tableauVilleDispo as $villeDispo): ?>
                     <option value="<?php echo $villeDispo->getVilNum() ?>"><?php echo $villeManager->getVilNomId($villeDispo->getVilNum()) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
 
-        <div class="">
-            <label for="">Date de départ : </label>
+        <div>
+            <label>Date de départ : </label>
             <input type="date" name="pro_date" value="<?php echo date("Y-m-d"); ?>" required>
         </div>
 
-        <div class="">
-            <label for="">Heure de départ : </label>
+        <div>
+            <label>Heure de départ : </label>
             <input type="time" name="pro_time" value="<?php echo date("H:i"); ?>" required>
 
         </div>
 
-        <div class="">
-            <label for="">Nombre de place : </label>
+        <div>
+            <label>Nombre de place : </label>
             <input type="number" name="pro_place" value="" min="1" required>
         </div>
 

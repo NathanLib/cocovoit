@@ -8,7 +8,8 @@ $tableauPersonne = $manager -> getAllPersonnes();
 		<h1>Modifier une personne</h1>
 
 		<label> Nom : </label>
-		<select class="" name="per_num" required>
+		<select name="per_num" required>
+			<option value="">Choisir personne</option>
 			<?php foreach ($tableauPersonne as $pers): ?>
 				<option value="<?php echo $pers->getPerNum() ?>"><?php echo $pers->getPerNom().' '.$pers->getPerPrenom(); ?></option>
 			<?php endforeach; ?>
@@ -43,7 +44,7 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 
 		<div class="LB">
 			<label> Email : </label>
-			<input type="mail" name="per_mail" value="<?php  echo($personne -> getPerMail()); ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+			<input type="email" name="per_mail" value="<?php  echo($personne -> getPerMail()); ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
 		</div>
 
 		<div class="LB">
@@ -70,8 +71,8 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 
 			<div class="AjouterPersonne">
 				<label> Année : </label>
+				<option value="">Choisir année</option>
 				<select class="" name="div_num" required>
-					<option><?php echo $divisionManager->getDivisionNomId($Etud -> getDivNum()); ?></option>
 					<?php foreach ($listeDivisions as $division): ?>
 						<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
 					<?php endforeach; ?>
@@ -80,8 +81,8 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 
 			<div class="AjouterPersonne">
 				<label> Département : </label>
+				<option value="">Choisir département</option>
 				<select class="" name="dep_num" required>
-					<option><?php echo $departementManager->getDepartementNomId($Etud -> getDepNum()); ?></option>
 					<?php foreach ($listeDepartements as $departement): ?>
 						<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
 					<?php endforeach; ?>
@@ -97,13 +98,13 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 			?>
 			<div class="AjouterPersonne">	
 				<label> Tel pro : </label>
-				<input type="tel" name="per_tel" value="<?php  echo($salarie -> getSalTelProf()); ?>" pattern="(01|02|03|04|05|06|07|08|09)[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}" title="Téléphone au format 06.00.00.00.00 ou 0600000000" required>
+				<input type="tel" name="sal_telprof" value="<?php  echo($salarie -> getSalTelProf()); ?>" pattern="(01|02|03|04|05|06|07|08|09)[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}" title="Téléphone au format 06.00.00.00.00 ou 0600000000" required>
 			</div>
 
 			<div class="AjouterPersonne">
 				<label> Fonction : </label>
+				<option value="">Choisir département</option>
 				<select class="" name="fon_num" required>
-					<option><?php echo $fonctionManager->getFonctionNomId($salarie -> getFonNum()); ?></option>
 					<?php foreach ($listeFonctions as $fonction): ?>
 						<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
 					<?php endforeach; ?>
@@ -119,11 +120,11 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 	if ($manager -> estEtudiant($_SESSION['numPersonne'])) {
 		$etudiantManager = new EtudiantManager($db);
 		$Modification = $manager -> updatePersonne($_SESSION['numPersonne'], new Personne($_POST));
-		$etudiantManager -> updateEtudiant($_SESSION['numPersonne'], $_POST["div_num"], $_POST["dep_num"]);
+		$etudiantManager -> updateEtudiant($_SESSION['numPersonne'], new Etudiant($_POST));
 	}else{
 		$Modification = $manager -> updatePersonne($_SESSION['numPersonne'], new Personne($_POST));
 		$salarieManager = new SalarieManager($db);
-		$salarieManager -> updateSalarie($_SESSION['numPersonne'], $_POST["fon_num"], $_POST["per_tel"]);
+		$salarieManager -> updateSalarie($_SESSION['numPersonne'], new Salarie($_POST));
 	}
 
 	if($Modification) {?>

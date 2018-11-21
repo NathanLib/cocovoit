@@ -9,11 +9,12 @@ $tableauPersonne = $PersManager -> getAllPersonnes();
 ?>
 
 <?php if(empty($_POST["per_num"])) {  ?>
-	<form class="" action="#" method="post">
+	<form action="#" method="post">
 		<h1>Supprimer une personne</h1>
 
 		<label> Nom : </label>
-		<select class="" name="per_num" required>
+		<option value="">Choisir personne</option>
+		<select name="per_num" required>
 			<?php foreach ($tableauPersonne as $pers): ?>
 				<option value="<?php echo $pers->getPerNum() ?>"><?php echo $pers->getPerNom().' '.$pers->getPerPrenom(); ?></option>
 			<?php endforeach; ?>

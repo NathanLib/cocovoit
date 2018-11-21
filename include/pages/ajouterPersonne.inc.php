@@ -27,7 +27,7 @@ if(!isset($_SESSION['nouvellePersonne'])) {
 
 			<div class="LB">
 				<label> Email : </label>
-				<input type="mail" name="per_mail" value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+				<input type="email" name="per_mail" value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
 			</div>
 
 			<div class="LB">
@@ -70,6 +70,7 @@ if(!isset($_SESSION['nouvellePersonne'])) {
 			<form class="AjouterPersonne" action="#" method="post">
 				<div class="">
 					<label> Année : </label>
+					<option value="">Choisir année</option>
 					<select class="" name="div_num" required>
 						<?php foreach ($listeDivisions as $division): ?>
 							<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
@@ -79,6 +80,7 @@ if(!isset($_SESSION['nouvellePersonne'])) {
 
 				<div class="AjouterPersonne">
 					<label> Département : </label>
+					<option value="">Choisir département</option>
 					<select class="" name="dep_num" required>
 						<?php foreach ($listeDepartements as $departement): ?>
 							<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
@@ -105,6 +107,7 @@ if(!isset($_SESSION['nouvellePersonne'])) {
 
 				<div class="AjouterPersonne">
 					<label> Fonction : </label>
+					<option value="">Choisir fonction</option>
 					<select class="" name="fon_num" required>
 						<?php foreach ($listeFonctions as $fonction): ?>
 							<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
