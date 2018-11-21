@@ -62,7 +62,9 @@ class ProposeManager{
 
 	public function getVilleArrivee($numVilleDepart) {
 		$requete=$this->db->prepare(
-			'SELECT vil.vil_num, vil.vil_nom FROM ville vil INNER JOIN  parcours par ON par.vil_num2=vil.vil_num WHERE par.vil_num1=:numVilleDepart'
+			'SELECT vil.vil_num, vil.vil_nom FROM ville vil INNER JOIN  parcours par ON par.vil_num2=vil.vil_num WHERE par.vil_num1=:numVilleDepart
+			UNION
+			SELECT vil.vil_num, vil.vil_nom FROM ville vil INNER JOIN  parcours par ON par.vil_num1=vil.vil_num WHERE par.vil_num2=:numVilleDepart'
 		);
 		$requete->bindValue(':numVilleDepart',$numVilleDepart,PDO::PARAM_STR);
 		$requete->execute();
@@ -75,5 +77,33 @@ class ProposeManager{
 		$requete->closeCursor();
 	}
 
-	/* SELECT par.vil_num1 AS ville_depart, par.vil_num2 AS ville_arrivee, pro.pro_date, pro.pro_time, pro.pro_place, per.per_nom, per.per_prenom FROM propose pro JOIN parcours par ON par.par_num = pro.par_num JOIN personne per ON per.per_num=pro.per_num WHERE par.vil_num1=7 AND par.vil_num2=5 AND pro.pro_date BETWEEN '2018/12/29' AND '2018/12/30' AND pro.pro_sens=0 */
+	/*
+	SELECT par.vil_num1 AS ville_depart, par.vil_num2 AS ville_arrivee, pro.pro_date, pro.pro_time, pro.pro_place, per.per_nom, per.per_prenom FROM propose pro JOIN parcours par ON par.par_num = pro.par_num JOIN personne per ON per.per_num=pro.per_num WHERE par.vil_num1=:vil_num1 AND par.vil_num2=:vil_num2 AND pro.pro_date BETWEEN :pro_date1 AND :pro_date2 AND pro.pro_time>:pro_time AND pro.pro_sens=:pro_sens
+	*/
+	public function getAllPropositions($par_num, $pro_date, $precision, $pro_time, $pro_sens) {
+		$requete=$this->db->prepare(
+			'SELECT par.vil_num1 AS ville_depart, par.vil_num2 AS ville_arrivee, pro.pro_date, pro.pro_time, pro.pro_place, per.per_nom, per.per_prenom FROM propose pro
+			INNER JOIN parcours par ON par.par_num = pro.par_num
+			INNER JOIN personne per ON per.per_num=pro.per_num
+			WHERE par.par_num=:par_num AND pro.pro_date>=SUBDATE(:pro_date, INTERVAL :precision DAY) AND pro.pro_date<=ADDDATE(:pro_date, INTERVAL :precision DAY) AND pro.pro_time>:pro_time AND pro.pro_sens=:pro_sens'
+		);
+
+		$requete->bindValue(':par_num', $par_num, PDO::PARAM_STR);
+		$requete->bindValue(':pro_date', $pro_date, PDO::PARAM_STR);
+		$requete->bindValue(':precision', $precision, PDO::PARAM_STR);
+		$requete->bindValue(':pro_time', $pro_time, PDO::PARAM_STR);
+		$requete->bindValue(':pro_sens', $pro_sens, PDO::PARAM_STR);
+var_dump($requete);
+		$requete->execute();
+
+		while ($proposition = $requete->fetch(PDO::FETCH_OBJ)) {
+			$listePropositions[] = $proposition;
+		}
+
+		if (empty($listePropositions)) {
+			return 0;
+		}
+		return $listePropositions;
+		$requete->closeCursor();
+	}
 }

@@ -71,10 +71,10 @@ class ParcoursManager{
 	public function getParcours($numVilleDepart, $numVilleArrivee){
 		$requete = $this->db->prepare(
 			'SELECT par_num, 0 as pro_sens FROM parcours
-			WHERE (vil_num1 = :numDepart AND vil_num2 = :numArrivee)
+			WHERE vil_num1 = :numDepart AND vil_num2 = :numArrivee
 			UNION
 			SELECT par_num, 1 as pro_sens FROM parcours
-			WHERE (vil_num1 = :numArrivee AND vil_num2 = :numDepart)'
+			WHERE vil_num1 = :numArrivee AND vil_num2 = :numDepart'
 		);
 		$requete->bindValue(':numDepart', $numVilleDepart);
 		$requete->bindValue(':numArrivee', $numVilleArrivee);

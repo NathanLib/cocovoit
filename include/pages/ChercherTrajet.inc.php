@@ -23,7 +23,7 @@ $ProposeManager = new ProposeManager($db);
     </form>
 <?php } else { ?>
 
-    <?php if (!empty($_POST['villeDepart']) && empty($_POST['vil_num2'])): ?>
+    <?php if (!empty($_POST['villeDepart']) && empty($_POST['vil_num2'])) { ?>
         <form class="Formulaire" action="#" method="post">
             <?php
             $villeManager = new VilleManager($db);
@@ -58,8 +58,8 @@ $ProposeManager = new ProposeManager($db);
 
             <div class="">
                 <label for="">Précision : </label>
-                <select class="" name="" required>
-                    <option value="0">Ce jour</option>
+                <select class="" name="precision" required>
+                    <option value=0 >Ce jour</option>
                     <?php for ($i=1; $i <PRECISION_DATE_RECHERCHE+1 ; $i++) {
                         ?>
                         <option value="<?php echo $i; ?>">+/- <?php echo $i; ?> jours</option>
@@ -70,10 +70,10 @@ $ProposeManager = new ProposeManager($db);
 
             <div class="">
                 <label for="">A partir de : </label>
-                <select class="" name="" required>
+                <select class="" name="pro_time" required>
                     <?php for ($i=0; $i <24 ; $i++) {
                         ?>
-                        <option value="<?php echo $i; ?>"><?php echo $i; ?> h </option>
+                        <option value="<?php echo $i.".00.00"; ?>"><?php echo $i; ?> h </option>
                         <?php
                     } ?>
                 </select>
@@ -81,6 +81,42 @@ $ProposeManager = new ProposeManager($db);
 
             <input class="BoutonValider" type="submit" value="Valider">
         </form>
-    <?php endif; ?>
+    <?php } else {
+        $parcoursManager = new ParcoursManager($db);
+        $numParcours = $parcoursManager->getParcours($_SESSION['numVilleDepart'],$_POST['vil_num2'])->par_num;
+        $sensPacours = $parcoursManager->getParcours($_SESSION['numVilleDepart'],$_POST['vil_num2'])->pro_sens;
 
-<?php } ?>
+var_dump($_POST['precision']);
+         $resultat=$ProposeManager->getAllPropositions($numParcours, $_POST['pro_date'], $_POST['precision'], $_POST['pro_time'], $sensPacours);
+        var_dump($resultat);
+        if($resultat===0){
+            echo "ntm";
+        } else {
+        ?>
+        <table>
+        	<tr>
+        		<th><b> Ville départ </b></th>
+        		<th><b> Ville arrivée </b></th>
+        		<th><b> Date de départ </b></th>
+                <th><b> Heure départ </b></th>
+                <th><b> Nombre de places </b></th>
+                <th><b> Nom du covoitureur </b></th>
+        	</tr>
+
+        	<?php
+            foreach ($resultat as $proposition): ?>
+        		<tr>
+        			<td class="TableauLister"><?php echo "1";?></td>
+        			<td class="TableauLister"><?php echo "1"; ?></td>
+        			<td class="TableauLister"><?php echo "1"; ?></td>
+        			<td class="TableauLister"><?php echo "1"; ?></td>
+                    <td class="TableauLister"><?php echo "1";?></td>
+        			<td class="TableauLister"><?php echo "1"; ?></td>
+        		</tr>
+        	<?php endforeach; ?>
+        </table>
+        <?php
+    } ?>
+
+<?php }
+} ?>
