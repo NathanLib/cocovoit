@@ -136,4 +136,16 @@ class PersonneManager{
 			return $requete->execute();
 		}
 	}
+
+	//Fonction qui permet d'obtenir le nombre de personnes
+	//présents dans la base de données
+	public function getNbPersonne(){
+
+		$sql='SELECT count(*) as TOTAL FROM personne';
+		$req = $this->db->query($sql);
+		$nbPersonne = $req->fetch(PDO::FETCH_OBJ);
+
+		return $nbPersonne->TOTAL;
+		$req->closeCursor();
+	}
 }
