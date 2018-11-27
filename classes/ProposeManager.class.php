@@ -93,7 +93,7 @@ class ProposeManager{
 		$requete->bindValue(':precision', $precision, PDO::PARAM_STR);
 		$requete->bindValue(':pro_time', $pro_time, PDO::PARAM_STR);
 		$requete->bindValue(':pro_sens', $pro_sens, PDO::PARAM_STR);
-var_dump($requete);
+
 		$requete->execute();
 
 		while ($proposition = $requete->fetch(PDO::FETCH_OBJ)) {

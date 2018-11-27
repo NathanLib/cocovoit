@@ -86,12 +86,19 @@ $ProposeManager = new ProposeManager($db);
         $numParcours = $parcoursManager->getParcours($_SESSION['numVilleDepart'],$_POST['vil_num2'])->par_num;
         $sensPacours = $parcoursManager->getParcours($_SESSION['numVilleDepart'],$_POST['vil_num2'])->pro_sens;
 
-var_dump($_POST['precision']);
          $resultat=$ProposeManager->getAllPropositions($numParcours, $_POST['pro_date'], $_POST['precision'], $_POST['pro_time'], $sensPacours);
-        var_dump($resultat);
+
         if($resultat===0){
-            echo "ntm";
+            ?>
+            <p>
+                <img src="image/erreur.png" alt="erreur" title="erreur">
+                <b>
+                    Désolé, pas de trajet disponible !
+                </b>
+            </p>
+            <?php
         } else {
+            $villeManager = new VilleManager($db);
         ?>
         <table>
         	<tr>
@@ -106,12 +113,23 @@ var_dump($_POST['precision']);
         	<?php
             foreach ($resultat as $proposition): ?>
         		<tr>
-        			<td class="TableauLister"><?php echo "1";?></td>
-        			<td class="TableauLister"><?php echo "1"; ?></td>
-        			<td class="TableauLister"><?php echo "1"; ?></td>
-        			<td class="TableauLister"><?php echo "1"; ?></td>
-                    <td class="TableauLister"><?php echo "1";?></td>
-        			<td class="TableauLister"><?php echo "1"; ?></td>
+        			<td class="TableauLister">
+                        <?php echo $villeManager->getVilNomId($proposition->ville_depart);?>
+                    </td>
+        			<td class="TableauLister">
+                        <?php echo $villeManager->getVilNomId($proposition->ville_arrivee); ?>
+                    </td>
+        			<td class="TableauLister">
+                        <?php echo $proposition->pro_date; ?></td>
+        			<td class="TableauLister">
+                        <?php echo $proposition->pro_time; ?>
+                    </td>
+                    <td class="TableauLister">
+                        <?php echo $proposition->pro_place;?>
+                    </td>
+        			<td class="TableauLister">
+                        <?php echo $proposition->per_nom." ".$proposition->per_prenom; ?>
+                    </td>
         		</tr>
         	<?php endforeach; ?>
         </table>
