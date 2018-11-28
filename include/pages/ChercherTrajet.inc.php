@@ -10,15 +10,16 @@ $ProposeManager = new ProposeManager($db);
     $tableauVilleDepart = $ProposeManager->getVilleDepart();
     ?>
 
-    <form class="" action="#" method="post">
-        <label> Ville de départ : </label>
-        <select class="" name="villeDepart" required>
-            <option value=""></option>
-            <?php foreach ($tableauVilleDepart as $ville): ?>
-                <option value="<?php echo $ville->getVilNum(); ?>"><?php echo $ville->getVilNom(); ?></option>
-            <?php endforeach; ?>
-        </select>
-
+    <form class="Formulaire" action="#" method="post">
+        <div class="AjouterPersonne">
+            <label> Ville de départ : </label>
+            <select class="" name="villeDepart" required>
+                <option value="">Choisir ville</option>
+                <?php foreach ($tableauVilleDepart as $ville): ?>
+                    <option value="<?php echo $ville->getVilNum(); ?>"><?php echo $ville->getVilNom(); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
         <input class="BoutonValider" type="submit" value="Valider">
     </form>
 <?php } else { ?>
@@ -29,7 +30,7 @@ $ProposeManager = new ProposeManager($db);
             $villeManager = new VilleManager($db);
             ?>
 
-            <div class="">
+            <div class="AjouterPersonne">
                 <label for="">Ville de départ :</label>
                 <?php
                 echo $villeManager->getVilNomId($_POST['villeDepart']);
@@ -37,26 +38,26 @@ $ProposeManager = new ProposeManager($db);
                 ?>
             </div>
 
-            <div class="">
+            <div class="AjouterPersonne">
                 <?php
                 $tableauVilleArrivee = $ProposeManager->getVilleArrivee($_SESSION['numVilleDepart']);
                 ?>
 
                 <label for="">Ville d'arrivée : </label>
                 <select class="" name="vil_num2" required>
-                    <option value=""></option>
+                    <option value="">Choisir ville</option>
                     <?php foreach ($tableauVilleArrivee as $ville): ?>
                         <option value="<?php echo $ville->getVilNum(); ?>"><?php echo $ville->getVilNom(); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
 
-            <div class="">
+            <div class="AjouterPersonne">
                 <label for="">Date de départ : </label>
                 <input type="date" name="pro_date" value="<?php echo date("Y-m-d"); ?>" required>
             </div>
 
-            <div class="">
+            <div class="AjouterPersonne">
                 <label for="">Précision : </label>
                 <select class="" name="precision" required>
                     <option value=0 >Ce jour</option>
@@ -68,7 +69,7 @@ $ProposeManager = new ProposeManager($db);
                 </select>
             </div>
 
-            <div class="">
+            <div class="AjouterPersonne">   
                 <label for="">A partir de : </label>
                 <select class="" name="pro_time" required>
                     <?php for ($i=0; $i <24 ; $i++) {
@@ -86,7 +87,7 @@ $ProposeManager = new ProposeManager($db);
         $numParcours = $parcoursManager->getParcours($_SESSION['numVilleDepart'],$_POST['vil_num2'])->par_num;
         $sensPacours = $parcoursManager->getParcours($_SESSION['numVilleDepart'],$_POST['vil_num2'])->pro_sens;
 
-         $resultat=$ProposeManager->getAllPropositions($numParcours, $_POST['pro_date'], $_POST['precision'], $_POST['pro_time'], $sensPacours);
+        $resultat=$ProposeManager->getAllPropositions($numParcours, $_POST['pro_date'], $_POST['precision'], $_POST['pro_time'], $sensPacours);
 
         if($resultat===0){
             ?>
@@ -99,42 +100,42 @@ $ProposeManager = new ProposeManager($db);
             <?php
         } else {
             $villeManager = new VilleManager($db);
-        ?>
-        <table>
-        	<tr>
-        		<th><b> Ville départ </b></th>
-        		<th><b> Ville arrivée </b></th>
-        		<th><b> Date de départ </b></th>
-                <th><b> Heure départ </b></th>
-                <th><b> Nombre de places </b></th>
-                <th><b> Nom du covoitureur </b></th>
-        	</tr>
+            ?>
+            <table>
+             <tr>
+              <th><b> Ville départ </b></th>
+              <th><b> Ville arrivée </b></th>
+              <th><b> Date de départ </b></th>
+              <th><b> Heure départ </b></th>
+              <th><b> Nombre de places </b></th>
+              <th><b> Nom du covoitureur </b></th>
+          </tr>
 
-        	<?php
-            foreach ($resultat as $proposition): ?>
-        		<tr>
-        			<td class="TableauLister">
-                        <?php echo $villeManager->getVilNomId($proposition->ville_depart);?>
-                    </td>
-        			<td class="TableauLister">
-                        <?php echo $villeManager->getVilNomId($proposition->ville_arrivee); ?>
-                    </td>
-        			<td class="TableauLister">
-                        <?php echo $proposition->pro_date; ?></td>
-        			<td class="TableauLister">
-                        <?php echo $proposition->pro_time; ?>
-                    </td>
-                    <td class="TableauLister">
-                        <?php echo $proposition->pro_place;?>
-                    </td>
-        			<td class="TableauLister">
-                        <?php echo $proposition->per_nom." ".$proposition->per_prenom; ?>
-                    </td>
-        		</tr>
-        	<?php endforeach; ?>
-        </table>
-        <?php
-    } ?>
+          <?php
+          foreach ($resultat as $proposition): ?>
+              <tr>
+               <td class="TableauLister">
+                <?php echo $villeManager->getVilNomId($proposition->ville_depart);?>
+            </td>
+            <td class="TableauLister">
+                <?php echo $villeManager->getVilNomId($proposition->ville_arrivee); ?>
+            </td>
+            <td class="TableauLister">
+                <?php echo $proposition->pro_date; ?></td>
+                <td class="TableauLister">
+                    <?php echo $proposition->pro_time; ?>
+                </td>
+                <td class="TableauLister">
+                    <?php echo $proposition->pro_place;?>
+                </td>
+                <td class="TableauLister">
+                    <?php echo $proposition->per_nom." ".$proposition->per_prenom; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+    <?php
+} ?>
 
 <?php }
 } ?>
