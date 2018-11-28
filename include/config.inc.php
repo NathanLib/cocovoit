@@ -3,7 +3,7 @@
 // A modifier en fonction de la configuration
 
 define('DBHOST', "localhost");
-define('DBNAME', "cocovoit");
+define('DBNAME', "covoiturage");
 define('DBUSER', "bd");
 define('DBPASSWD', "bede");
 define('ENV','dev');
