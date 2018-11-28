@@ -33,7 +33,7 @@ class PersonneManager{
 		$req = $this->db->query($sql);
 
 		while ($personne = $req->fetch(PDO::FETCH_OBJ)) {
-			$listePersonnes[] = new personne($personne);
+			$listePersonnes[] = new Personne($personne);
 		}
 
 		return $listePersonnes;

@@ -54,5 +54,6 @@ class VilleManager{
 		
 		$retour=$requete->fetch(PDO::FETCH_ASSOC);
 		return $retour['vil_nom'];
+		$req->closeCursor();
 	}
 }

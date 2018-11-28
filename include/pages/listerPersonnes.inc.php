@@ -44,8 +44,7 @@ $nbPersonnes = $PersManager -> getNbPersonne();
 			$DepaManager = new DepartementManager($db);
 			$VillManager = new VilleManager($db);
 			$Etud = $EtudManager -> getEtudiantId($numPersonne);
-			$Depa = $DepaManager -> getDepartementId($numPersonne);
-
+			$Depa = $DepaManager -> getDepartementId($Etud -> getDepNum());
 			?>	
 			<h1>Détail sur <?php echo($message); echo $Personne->getPerNom(); ?></h1>
 			<table>

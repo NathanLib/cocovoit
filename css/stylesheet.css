@@ -169,7 +169,7 @@ h1{
 .BoutonValider{
 	width: 12.5%;
 	background-color: black;
-	color: white; 
+	color: white;
 	border-radius: 30px;
 	margin-top: 1%;
 }
@@ -177,7 +177,7 @@ h1{
 .BoutonValider2{
 	width: 12.5%;
 	background-color: black;
-	color: white; 
+	color: white;
 	border-radius: 30px;
 	margin-top: 1%;
 	margin-left: 40%;
@@ -187,8 +187,8 @@ h1{
 .TableauLister{
 	border: thin solid black;
 	text-align: center;*
-	margin-bottom: 0px; 
-	margin-left: 0px; 
+	margin-bottom: 0px;
+	margin-left: 0px;
 }
 
 table{
@@ -238,15 +238,42 @@ table{
 .AjouterPersonne select {
 	border-radius: 30px;
 	height: 110%;
-	margin-bottom: 1.5%;	
+	margin-bottom: 1.5%;
 }
 
 .AjouterPersonne input {
 	border-radius: 30px;
 	height: 110%;
-	margin-bottom: 1.5%;	
+	margin-bottom: 1.5%;
 }
 
 .CAT {
 	margin-top: 2%;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted #333333;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -100px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }

@@ -22,7 +22,7 @@ class EtudiantManager{
 	//Fonction qui permet d'avoir un étudiant
 	//à partir du numéro de ce dernier
 	public function getEtudiantId($id){
-		$requete = $this->db->prepare('SELECT * FROM etudiant WHERE per_num = :per_num');
+		$requete = $this->db->prepare('SELECT * FROM etudiant WHERE per_num=:per_num');
 		$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
 		$requete->execute();
 

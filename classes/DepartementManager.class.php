@@ -25,6 +25,7 @@ class DepartementManager{
 
         $retour = $requete->fetch(PDO::FETCH_OBJ);
         return new Departement($retour);
+        $requete->closeCursor();
     }
 
     //Fonction qui permet d'avoir le département d'un étudiant
@@ -36,5 +37,6 @@ class DepartementManager{
         
         $retour=$requete->fetch(PDO::FETCH_ASSOC);
         return $retour['dep_nom'];
+        $requete->closeCursor();
     }
 }

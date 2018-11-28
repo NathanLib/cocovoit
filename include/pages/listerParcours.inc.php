@@ -1,7 +1,7 @@
 <?php
 $db = new myPdo();
 $parcourManager = new ParcoursManager($db);
-$villeManager= new villeManager($db);
+$villeManager= new VilleManager($db);
 
 $listeParcours = $parcourManager->getAllParcours();
 $nbParcours = $parcourManager->getNbParcours();

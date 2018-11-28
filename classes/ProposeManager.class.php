@@ -82,7 +82,7 @@ class ProposeManager{
 	*/
 	public function getAllPropositions($par_num, $pro_date, $precision, $pro_time, $pro_sens) {
 		$requete=$this->db->prepare(
-			'SELECT par.vil_num1 AS ville_depart, par.vil_num2 AS ville_arrivee, pro.pro_date, pro.pro_time, pro.pro_place, per.per_nom, per.per_prenom FROM propose pro
+			'SELECT par.vil_num1 AS ville_depart, par.vil_num2 AS ville_arrivee, pro.pro_date, pro.pro_time, pro.pro_place, per.per_num as per_num, per.per_nom, per.per_prenom FROM propose pro
 			INNER JOIN parcours par ON par.par_num = pro.par_num
 			INNER JOIN personne per ON per.per_num=pro.per_num
 			WHERE par.par_num=:par_num AND pro.pro_date>=SUBDATE(:pro_date, INTERVAL :precision DAY) AND pro.pro_date<=ADDDATE(:pro_date, INTERVAL :precision DAY) AND pro.pro_time>:pro_time AND pro.pro_sens=:pro_sens'

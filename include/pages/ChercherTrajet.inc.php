@@ -69,7 +69,7 @@ $ProposeManager = new ProposeManager($db);
                 </select>
             </div>
 
-            <div class="AjouterPersonne">   
+            <div class="AjouterPersonne">
                 <label for="">A partir de : </label>
                 <select class="" name="pro_time" required>
                     <?php for ($i=0; $i <24 ; $i++) {
@@ -102,40 +102,65 @@ $ProposeManager = new ProposeManager($db);
             $villeManager = new VilleManager($db);
             ?>
             <table>
-             <tr>
-              <th><b> Ville départ </b></th>
-              <th><b> Ville arrivée </b></th>
-              <th><b> Date de départ </b></th>
-              <th><b> Heure départ </b></th>
-              <th><b> Nombre de places </b></th>
-              <th><b> Nom du covoitureur </b></th>
-          </tr>
+                <tr>
+                    <th><b> Ville départ </b></th>
+                    <th><b> Ville arrivée </b></th>
+                    <th><b> Date de départ </b></th>
+                    <th><b> Heure départ </b></th>
+                    <th><b> Nombre de places </b></th>
+                    <th><b> Nom du covoitureur </b></th>
+                </tr>
 
-          <?php
-          foreach ($resultat as $proposition): ?>
-              <tr>
-               <td class="TableauLister">
-                <?php echo $villeManager->getVilNomId($proposition->ville_depart);?>
-            </td>
-            <td class="TableauLister">
-                <?php echo $villeManager->getVilNomId($proposition->ville_arrivee); ?>
-            </td>
-            <td class="TableauLister">
-                <?php echo $proposition->pro_date; ?></td>
-                <td class="TableauLister">
-                    <?php echo $proposition->pro_time; ?>
-                </td>
-                <td class="TableauLister">
-                    <?php echo $proposition->pro_place;?>
-                </td>
-                <td class="TableauLister">
-                    <?php echo $proposition->per_nom." ".$proposition->per_prenom; ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-    <?php
-} ?>
+                <?php
+                $avisManager = new AvisManager($db);
+                foreach ($resultat as $proposition):
+                    $personneNoteAvis = $avisManager->getNoteAvis($proposition->per_num);
+                    $personneCommAvis = $avisManager->getCommAvis($proposition->per_num);
+                    ?>
+                    <tr>
+                        <td class="TableauLister">
+                            <?php echo $villeManager->getVilNomId($proposition->ville_depart);?>
+                        </td>
+                        <td class="TableauLister">
+                            <?php echo $villeManager->getVilNomId($proposition->ville_arrivee); ?>
+                        </td>
+                        <td class="TableauLister">
+                            <?php echo $proposition->pro_date; ?></td>
+                            <td class="TableauLister">
+                                <?php echo $proposition->pro_time; ?>
+                            </td>
+                            <td class="TableauLister">
+                                <?php echo $proposition->pro_place;?>
+                            </td>
+                            <td class="TableauLister">
+                                <a href="#" class="tooltip">
+                                    <?php echo $proposition->per_nom." ".$proposition->per_prenom; ?>
+                                    <span class="tooltiptext">
+                                        <?php if ($personneNoteAvis===0 && $personneCommAvis===0) {
+                                            ?> <p>Aucun avis !</p> <?php
+                                        }
+                                        elseif ($personneNoteAvis===0) {
+                                            ?>
+                                            <p>Dernier avis : <?php echo $personneCommAvis->avi_comm; ?></p>
+                                            <?php
+                                        }
+                                        elseif ($personneCommAvis===0) {
+                                            ?>
+                                            <p>Moyenne des avis : <?php echo $personneNoteAvis->moyenne; ?></p>
+                                            <?php
+                                        }
+                                        else {?>
+                                            <p>Moyenne des avis : <?php echo $personneNoteAvis->moyenne; ?></p>
+                                            <p>Dernier avis : <?php echo $personneCommAvis->avi_comm; ?></p>
+                                        <?php } ?>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+                <?php
+            } ?>
 
-<?php }
-} ?>
+        <?php }
+    } ?>

@@ -26,9 +26,9 @@ $personneManager = new PersonneManager($db);
             $_SESSION['nbRand2'] = $nbRand2;
             ?>
 
-            <img src="<?php echo "image/nb/".$_SESSION['nbRand1'] ?>" alt="captcha1">
+            <img src="<?php echo "image/nb/".$_SESSION['nbRand1'].".jpg" ?>" alt="captcha1">
             <b>+</b>
-            <img src="<?php echo "image/nb/".$_SESSION['nbRand2'] ?>" alt="captcha2">
+            <img src="<?php echo "image/nb/".$_SESSION['nbRand2'].".jpg" ?>" alt="captcha2">
             <b>=</b>
 
             <div class="">
