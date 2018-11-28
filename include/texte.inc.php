@@ -26,7 +26,7 @@
 			break;
 			case 3:
 			// inclure ici la page modification des personnes
-			include("pages/ModifierPersonne.inc.php");
+			include("pages/modifierPersonne.inc.php");
 			break;
 			case 4:
 			// inclure ici la page suppression personnes
@@ -62,7 +62,7 @@
 			case 9:
 			if (isset($_SESSION['loggé'])) {
 				// inclure ici la page proposer trajet
-				include_once('pages/ProposerTrajet.inc.php');
+				include_once('pages/proposerTrajet.inc.php');
 			}else{
 				//retour à l'acceuil
 				include_once('pages/accueil.inc.php');
@@ -71,7 +71,7 @@
 			case 10:
 			if (isset($_SESSION['loggé'])) {
 				// inclure ici la page rechercher trajet
-				include_once('pages/ChercherTrajet.inc.php');
+				include_once('pages/chercherTrajet.inc.php');
 			}else{
 				//retour à l'acceuil
 				include_once('pages/accueil.inc.php');
@@ -80,12 +80,12 @@
 
 			case 11:
 			// inclure ici la page de connexion
-			include_once('pages/Connexion.inc.php');
+			include_once('pages/connexion.inc.php');
 			break;
 
 			case 12:
 			// inclure ici la page de d�connexion
-			include_once('pages/Deconnexion.inc.php');
+			include_once('pages/deconnexion.inc.php');
 			break;
 
 			default : 	include_once('pages/accueil.inc.php');
