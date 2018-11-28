@@ -13,8 +13,8 @@ $tableauPersonne = $PersManager -> getAllPersonnes();
 		<h1>Supprimer une personne</h1>
 
 		<label> Nom : </label>
-		<option value="">Choisir personne</option>
 		<select name="per_num" required>
+			<option value="">Choisir personne</option>
 			<?php foreach ($tableauPersonne as $pers): ?>
 				<option value="<?php echo $pers->getPerNum() ?>"><?php echo $pers->getPerNom().' '.$pers->getPerPrenom(); ?></option>
 			<?php endforeach; ?>

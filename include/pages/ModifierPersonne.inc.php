@@ -71,8 +71,8 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 
 			<div class="AjouterPersonne">
 				<label> Année : </label>
-				<option value="">Choisir année</option>
 				<select class="" name="div_num" required>
+					<option value="">Choisir année</option>
 					<?php foreach ($listeDivisions as $division): ?>
 						<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
 					<?php endforeach; ?>
@@ -81,8 +81,8 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 
 			<div class="AjouterPersonne">
 				<label> Département : </label>
-				<option value="">Choisir département</option>
 				<select class="" name="dep_num" required>
+					<option value="">Choisir département</option>
 					<?php foreach ($listeDepartements as $departement): ?>
 						<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
 					<?php endforeach; ?>
@@ -103,8 +103,8 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 
 			<div class="AjouterPersonne">
 				<label> Fonction : </label>
-				<option value="">Choisir département</option>
 				<select class="" name="fon_num" required>
+					<option value="">Choisir département</option>
 					<?php foreach ($listeFonctions as $fonction): ?>
 						<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
 					<?php endforeach; ?>
@@ -139,5 +139,5 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 			<img src="image/erreur.png" alt="erreur" title="erreur"> 
 			Erreur dans la modification de la personne !
 		</p>
-	<?php } ?>
-	<?php  } ?>
+	<?php } 
+     } ?>

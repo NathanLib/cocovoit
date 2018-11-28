@@ -22,8 +22,8 @@ class Departement{
 				$this->setDepNom($valeur);
 				break;
 
-				case 'div_num':
-				$this->setDivNum($valeur);
+				case 'vil_num':
+				$this->setVilNum($valeur);
 				break;
 			}
 		}

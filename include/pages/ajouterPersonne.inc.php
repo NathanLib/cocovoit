@@ -70,8 +70,8 @@ if(!isset($_SESSION['nouvellePersonne'])) {
 			<form class="AjouterPersonne" action="#" method="post">
 				<div class="">
 					<label> Année : </label>
-					<option value="">Choisir année</option>
 					<select class="" name="div_num" required>
+						<option value="">Choisir année</option>
 						<?php foreach ($listeDivisions as $division): ?>
 							<option value="<?php echo $division->getDivNum() ?>"><?php echo $division->getDivNom() ?></option>
 						<?php endforeach; ?>
@@ -80,8 +80,8 @@ if(!isset($_SESSION['nouvellePersonne'])) {
 
 				<div class="AjouterPersonne">
 					<label> Département : </label>
-					<option value="">Choisir département</option>
 					<select class="" name="dep_num" required>
+						<option value="">Choisir département</option>
 						<?php foreach ($listeDepartements as $departement): ?>
 							<option value="<?php echo $departement->getDepNum() ?>"><?php echo $departement->getDepNom() ?></option>
 						<?php endforeach; ?>
@@ -99,7 +99,7 @@ if(!isset($_SESSION['nouvellePersonne'])) {
 
 			<h1>Ajouter un salarié</h1>
 
-			<form class="" action="#" method="post">
+			<form action="#" method="post">
 				<div class="AjouterPersonne">
 					<label> Téléphone professionnel : </label>
 					<input type="tel" name="sal_telprof" value="" pattern="(01|02|03|04|05|06|07|08|09)[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}" title="Téléphone au format 06.00.00.00.00 ou 0600000000" required>
@@ -107,8 +107,8 @@ if(!isset($_SESSION['nouvellePersonne'])) {
 
 				<div class="AjouterPersonne">
 					<label> Fonction : </label>
-					<option value="">Choisir fonction</option>
-					<select class="" name="fon_num" required>
+					<select  name="fon_num" required>
+						<option>Choisir fonction</option>
 						<?php foreach ($listeFonctions as $fonction): ?>
 							<option value="<?php echo $fonction->getFonNum() ?>"><?php echo $fonction->getFonLibelle() ?></option>
 						<?php endforeach; ?>
