@@ -1,13 +1,14 @@
 <?php
 $db = new myPdo();
 $ProposeManager = new ProposeManager($db);
+$villeManager = new VilleManager($db);
 ?>
 
 <h1>Rechercher un trajet</h1>
 
 <?php if(empty($_POST["villeDepart"]) && empty($_POST['vil_num2'])) { ?>
     <?php
-    $tableauVilleDepart = $ProposeManager->getVilleDepart();
+    $tableauVilleDepart = $villeManager->getVilleDepart();
     ?>
 
     <form class="Formulaire" action="#" method="post">
@@ -26,12 +27,9 @@ $ProposeManager = new ProposeManager($db);
 
     <?php if (!empty($_POST['villeDepart']) && empty($_POST['vil_num2'])) { ?>
         <form class="Formulaire" action="#" method="post">
-            <?php
-            $villeManager = new VilleManager($db);
-            ?>
 
             <div class="AjouterPersonne">
-                <label for="">Ville de départ :</label>
+                <label>Ville de départ :</label>
                 <?php
                 echo $villeManager->getVilNomId($_POST['villeDepart']);
                 $_SESSION['numVilleDepart'] = $_POST['villeDepart'];
@@ -40,10 +38,10 @@ $ProposeManager = new ProposeManager($db);
 
             <div class="AjouterPersonne">
                 <?php
-                $tableauVilleArrivee = $ProposeManager->getVilleArrivee($_SESSION['numVilleDepart']);
+                $tableauVilleArrivee = $villeManager->getVilleArrivee($_SESSION['numVilleDepart']);
                 ?>
 
-                <label for="">Ville d'arrivée : </label>
+                <label>Ville d'arrivée : </label>
                 <select class="" name="vil_num2" required>
                     <option value="">Choisir ville</option>
                     <?php foreach ($tableauVilleArrivee as $ville): ?>
@@ -53,14 +51,14 @@ $ProposeManager = new ProposeManager($db);
             </div>
 
             <div class="AjouterPersonne">
-                <label for="">Date de départ : </label>
+                <label>Date de départ : </label>
                 <input type="date" name="pro_date" value="<?php echo date("Y-m-d"); ?>" required>
             </div>
 
             <div class="AjouterPersonne">
-                <label for="">Précision : </label>
+                <label>Précision : </label>
                 <select class="" name="precision" required>
-                    <option value=0 >Ce jour</option>
+                    <option value="" >Ce jour</option>
                     <?php for ($i=1; $i <PRECISION_DATE_RECHERCHE+1 ; $i++) {
                         ?>
                         <option value="<?php echo $i; ?>">+/- <?php echo $i; ?> jours</option>
@@ -70,8 +68,9 @@ $ProposeManager = new ProposeManager($db);
             </div>
 
             <div class="AjouterPersonne">
-                <label for="">A partir de : </label>
+                <label>A partir de : </label>
                 <select class="" name="pro_time" required>
+                    <option value="">Choisir heure</option>
                     <?php for ($i=0; $i <24 ; $i++) {
                         ?>
                         <option value="<?php echo $i.".00.00"; ?>"><?php echo $i; ?> h </option>
@@ -99,7 +98,6 @@ $ProposeManager = new ProposeManager($db);
             </p>
             <?php
         } else {
-            $villeManager = new VilleManager($db);
             ?>
             <table>
                 <tr>
@@ -137,21 +135,21 @@ $ProposeManager = new ProposeManager($db);
                                     <?php echo $proposition->per_nom." ".$proposition->per_prenom; ?>
                                     <span class="tooltiptext">
                                         <?php if ($personneNoteAvis===0 && $personneCommAvis===0) {
-                                            ?> <p>Aucun avis !</p> <?php
+                                            ?> Aucun avis ! <?php
                                         }
                                         elseif ($personneNoteAvis===0) {
                                             ?>
-                                            <p>Dernier avis : <?php echo $personneCommAvis->avi_comm; ?></p>
+                                            Dernier avis : <?php echo $personneCommAvis->avi_comm; ?>
                                             <?php
                                         }
                                         elseif ($personneCommAvis===0) {
                                             ?>
-                                            <p>Moyenne des avis : <?php echo $personneNoteAvis->moyenne; ?></p>
+                                            Moyenne des avis : <?php echo $personneNoteAvis->moyenne; ?>
                                             <?php
                                         }
                                         else {?>
-                                            <p>Moyenne des avis : <?php echo $personneNoteAvis->moyenne; ?></p>
-                                            <p>Dernier avis : <?php echo $personneCommAvis->avi_comm; ?></p>
+                                            Moyenne des avis : <?php echo $personneNoteAvis->moyenne; ?>
+                                            Dernier avis : <?php echo $personneCommAvis->avi_comm; ?>
                                         <?php } ?>
                                     </span>
                                 </a>

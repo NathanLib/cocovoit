@@ -4,17 +4,18 @@ $manager = new PersonneManager($db);
 $tableauPersonne = $manager -> getAllPersonnes();
 ?>
 <?php if(empty($_POST["per_num"]) && empty($_POST["per_mail"])) {  ?>
-	<form class="" action="#" method="post">
+	<form class="Formulaire" action="#" method="post">
 		<h1>Modifier une personne</h1>
-
-		<label> Nom : </label>
-		<select name="per_num" required>
-			<option value="">Choisir personne</option>
-			<?php foreach ($tableauPersonne as $pers): ?>
-				<option value="<?php echo $pers->getPerNum() ?>"><?php echo $pers->getPerNom().' '.$pers->getPerPrenom(); ?></option>
-			<?php endforeach; ?>
-		</select>
-		<input class="BoutonValider" type="submit" value="Choisir">
+		<div class="AjouterPersonne">
+			<label> Nom : </label>
+			<select name="per_num" required>
+				<option value="">Choisir personne</option>
+				<?php foreach ($tableauPersonne as $pers): ?>
+					<option value="<?php echo $pers->getPerNum() ?>"><?php echo $pers->getPerNom().' '.$pers->getPerPrenom(); ?></option>
+				<?php endforeach; ?>
+			</select>
+			<input class="BoutonValider" type="submit" value="Choisir">
+		</div>
 	</form>
 <?php } 
 else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
@@ -90,7 +91,7 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 			</div>
 		<?php } else {
 			$salarieManager = new SalarieManager($db);
-			$fonctionManager = new fonctionManager($db);
+			$fonctionManager = new FonctionManager($db);
 			$salarie = $salarieManager -> getSalarieId($_POST["per_num"]);
 
 			$listeFonctions = $fonctionManager -> getAllFonctions();
@@ -140,4 +141,4 @@ else if(!empty($_POST["per_num"]) && empty($_POST["per_mail"])){
 			Erreur dans la modification de la personne !
 		</p>
 	<?php } 
-     } ?>
+} ?>

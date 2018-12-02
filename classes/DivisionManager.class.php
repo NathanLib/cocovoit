@@ -25,7 +25,7 @@ class DivisionManager{
 	//Fonction qui permet d'avoir le nom d'une division à partir 
 	//du numéro de celle ci
     public function getDivisionNomId($id){
-        $requete = $this->db->prepare('SELECT * FROM division WHERE div_num=:div_num');
+        $requete = $this->db->prepare('SELECT div_nom FROM division WHERE div_num=:div_num');
         $requete->bindValue(':div_num',$id,PDO::PARAM_STR);
         $requete->execute();
         

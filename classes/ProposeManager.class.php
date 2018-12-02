@@ -35,46 +35,12 @@ class ProposeManager{
 	//Fonction qui permet d'avoir le numéro d'un parcours
 	//à partir du numéro de propose
 	public function getParNumId($id){
-		$requete = $this->db->prepare('SELECT * FROM propose WHERE per_num=:per_num');
+		$requete = $this->db->prepare('SELECT par_num FROM propose WHERE per_num=:per_num');
 		$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
 		$requete->execute();
 
 		$retour=$requete->fetch(PDO::FETCH_ASSOC);
 		return $retour['par_num'];
-	}
-
-	public function getVilleDepart() {
-		$requete=$this->db->prepare(
-			'SELECT DISTINCT vil.vil_num, vil.vil_nom FROM ville vil INNER JOIN parcours par ON par.vil_num1=vil.vil_num INNER JOIN propose pro ON pro.par_num=par.par_num WHERE pro.pro_sens=0
-			UNION
-			SELECT DISTINCT vil.vil_num, vil.vil_nom FROM ville vil INNER JOIN parcours par ON par.vil_num2=vil.vil_num INNER JOIN propose pro ON pro.par_num=par.par_num WHERE pro.pro_sens=1'
-		);
-
-		$requete->execute();
-
-		while ($ville = $requete->fetch(PDO::FETCH_OBJ)) {
-			$rechercheVilleDepart[] = new Ville($ville);
-		}
-
-		return $rechercheVilleDepart;
-		$requete->closeCursor();
-	}
-
-	public function getVilleArrivee($numVilleDepart) {
-		$requete=$this->db->prepare(
-			'SELECT vil.vil_num, vil.vil_nom FROM ville vil INNER JOIN  parcours par ON par.vil_num2=vil.vil_num WHERE par.vil_num1=:numVilleDepart
-			UNION
-			SELECT vil.vil_num, vil.vil_nom FROM ville vil INNER JOIN  parcours par ON par.vil_num1=vil.vil_num WHERE par.vil_num2=:numVilleDepart'
-		);
-		$requete->bindValue(':numVilleDepart',$numVilleDepart,PDO::PARAM_STR);
-		$requete->execute();
-
-		while ($ville = $requete->fetch(PDO::FETCH_OBJ)) {
-			$rechercheVilleArrivee[] = new Ville($ville);
-		}
-
-		return $rechercheVilleArrivee;
-		$requete->closeCursor();
 	}
 
 	/*

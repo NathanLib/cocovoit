@@ -19,7 +19,7 @@ class DepartementManager{
     //Fonction qui permet d'avoir le département d'un étudiant
     //à partir du numéro de département
     public function getDepartementId($id){
-        $requete = $this->db->prepare('SELECT * FROM departement WHERE dep_num=:dep_num');
+        $requete = $this->db->prepare('SELECT dep_num, dep_nom, vil_num FROM departement WHERE dep_num=:dep_num');
         $requete->bindValue(':dep_num',$id,PDO::PARAM_STR);
         $requete->execute();
 
@@ -31,7 +31,7 @@ class DepartementManager{
     //Fonction qui permet d'avoir le département d'un étudiant
     //à partir du numéro de fonction
     public function getDepartementNomId($id){
-        $requete = $this->db->prepare('SELECT * FROM departement WHERE dep_num=:dep_num');
+        $requete = $this->db->prepare('SELECT dep_nom FROM departement WHERE dep_num=:dep_num');
         $requete->bindValue(':dep_num',$id,PDO::PARAM_STR);
         $requete->execute();
         

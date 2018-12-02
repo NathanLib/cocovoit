@@ -23,7 +23,7 @@ class FonctionManager{
 	//Fonction qui permet d'avoir la fonction d'un salarié
 	//à partir du numéro de fonction
 	public function getFonctionNomId($id){
-		$requete = $this->db->prepare('SELECT * FROM fonction WHERE fon_num=:fon_num');
+		$requete = $this->db->prepare('SELECT fon_libelle FROM fonction WHERE fon_num=:fon_num');
 		$requete->bindValue(':fon_num',$id,PDO::PARAM_STR);
 		$requete->execute();
 		

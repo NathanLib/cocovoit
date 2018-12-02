@@ -79,7 +79,7 @@ class PersonneManager{
 
 	//cette fonction permet de récupérer un étudiant à partir du numéro de ce dernier
 	public function getPerByID($id){
-		$requete = $this->db->prepare("SELECT * FROM personne WHERE per_num = :per_num");
+		$requete = $this->db->prepare("SELECT per_num, per_nom, per_prenom, per_tel, per_mail, per_login, per_pwd FROM personne WHERE per_num = :per_num");
 
 		$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
 		$requete->execute();
@@ -141,7 +141,7 @@ class PersonneManager{
 	//présents dans la base de données
 	public function getNbPersonne(){
 
-		$sql='SELECT count(*) as TOTAL FROM personne';
+		$sql='SELECT count(per_num) as TOTAL FROM personne';
 		$req = $this->db->query($sql);
 		$nbPersonne = $req->fetch(PDO::FETCH_OBJ);
 

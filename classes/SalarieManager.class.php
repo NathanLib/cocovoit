@@ -36,7 +36,7 @@ class SalarieManager{
 	//Fonction qui permet d'avoir un salarie
 	//à partir du numéro de ce dernier
 	public function getSalarieId($id){
-		$requete = $this->db->prepare('SELECT * FROM salarie WHERE per_num = :per_num');
+		$requete = $this->db->prepare('SELECT per_num, sal_telprof, fon_num FROM salarie WHERE per_num = :per_num');
 		$requete->bindValue(':per_num',$id,PDO::PARAM_STR);
 		$requete->execute();
 

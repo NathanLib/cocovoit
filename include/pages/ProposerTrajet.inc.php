@@ -36,7 +36,7 @@ $tableauVille = $villeManager->getAllVilles();
         <div class="AjouterPersonne">
             <?php
             $parcoursManager = new ParcoursManager($db);
-            $tableauVilleDispo = $parcoursManager->getVilleDispo($_POST['vil_num1']);
+            $tableauVilleDispo = $parcoursManager->getVilleDispoParcours($_POST['vil_num1']);
             ?>
 
             <label>Ville d'arrivée : </label>

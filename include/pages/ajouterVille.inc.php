@@ -6,10 +6,12 @@ $manager = new VilleManager($db);
 <h1>Ajouter une ville</h1>
 
 <?php if (empty($_POST["vil_nom"])) { ?>
-    <form class="" action="#" method="post">
-        <label> Nom : </label>
-        <input type="text" name="vil_nom" value="" required>
-        <input  class="BoutonValider" type="submit" value="Valider">
+    <form class="Formulaire" action="#" method="post">
+        <div class="AjouterPersonne">
+            <label> Nom : </label>
+            <input type="text" name="vil_nom" value="" required>
+            <input  class="BoutonValider" type="submit" value="Valider">
+        </div>
     </form>
 
 <?php } else {

@@ -43,10 +43,10 @@ if(!isset($_SESSION['nouvellePersonne'])) {
 			<div>
 				<b class="CAT">Catégorie :</b>
 				<input class="CAT" type="radio" name="categorie" value="etudiant"/>
-				<label class="CAT" for="etudiant">Etudiant</label>
+				<label class="CAT">Etudiant</label>
 
 				<input class="CAT" type="radio" name="categorie" value="personnel"/>
-				<label class="CAT" for="personnel">Personnel</label>
+				<label class="CAT">Personnel</label>
 			</div>
 
 			<input class="BoutonValider" type="submit" value="Valider">

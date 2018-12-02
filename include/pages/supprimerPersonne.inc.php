@@ -9,17 +9,18 @@ $tableauPersonne = $PersManager -> getAllPersonnes();
 ?>
 
 <?php if(empty($_POST["per_num"])) {  ?>
-	<form action="#" method="post">
+	<form class="Formulaire" action="#" method="post">
 		<h1>Supprimer une personne</h1>
-
-		<label> Nom : </label>
-		<select name="per_num" required>
-			<option value="">Choisir personne</option>
-			<?php foreach ($tableauPersonne as $pers): ?>
-				<option value="<?php echo $pers->getPerNum() ?>"><?php echo $pers->getPerNom().' '.$pers->getPerPrenom(); ?></option>
-			<?php endforeach; ?>
-		</select>
-		<input class="BoutonValider" type="submit" value="Supprimer">
+		<div class="AjouterPersonne">
+			<label> Nom : </label>
+			<select name="per_num" required>
+				<option value="">Choisir personne</option>
+				<?php foreach ($tableauPersonne as $pers): ?>
+					<option value="<?php echo $pers->getPerNum() ?>"><?php echo $pers->getPerNom().' '.$pers->getPerPrenom(); ?></option>
+				<?php endforeach; ?>
+			</select>
+			<input class="BoutonValider" type="submit" value="Supprimer">
+		</div>
 	</form>
 <?php } else {
 	$suppression = $AvisManager -> supprimerAvis($_POST["per_num"]);
