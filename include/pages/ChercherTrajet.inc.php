@@ -58,8 +58,8 @@ $villeManager = new VilleManager($db);
             <div class="AjouterPersonne">
                 <label>Précision : </label>
                 <select class="" name="precision" required>
-                    <option value="" >Ce jour</option>
-                    <?php for ($i=1; $i <PRECISION_DATE_RECHERCHE+1 ; $i++) {
+                    <option value="" >Choisir jour</option>
+                    <?php for ($i=0; $i <PRECISION_DATE_RECHERCHE+1 ; $i++) {
                         ?>
                         <option value="<?php echo $i; ?>">+/- <?php echo $i; ?> jours</option>
                         <?php

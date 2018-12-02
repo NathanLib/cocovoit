@@ -18,7 +18,8 @@ class ParcoursManager{
 			return $retour;
 		}
 
-		//vérif parcours existant
+		//Cette fonction permet de savoir si un parcours
+		//existe ou non 
 		public function getParcoursExist($vil_num1, $vil_num2) {
 
 			$requete = $this->db->prepare(

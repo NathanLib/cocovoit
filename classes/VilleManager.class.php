@@ -57,7 +57,9 @@ class VilleManager{
 		$req->closeCursor();
 	}
 
-		public function getVilleDepart() {
+	//Cette fonction permet d'obtenir toutes les villes 
+	//de départ pour les parcours
+	public function getVilleDepart() {
 		$requete=$this->db->prepare(
 			'SELECT DISTINCT vil.vil_num, vil.vil_nom FROM ville vil INNER JOIN parcours par ON par.vil_num1=vil.vil_num INNER JOIN propose pro ON pro.par_num=par.par_num WHERE pro.pro_sens=0
 			UNION
@@ -74,6 +76,8 @@ class VilleManager{
 		$requete->closeCursor();
 	}
 
+	//Cette fonction permet d'obtenir toutes les villes 
+	//d'arrivée pour les parcours
 	public function getVilleArrivee($numVilleDepart) {
 		$requete=$this->db->prepare(
 			'SELECT vil.vil_num, vil.vil_nom FROM ville vil INNER JOIN  parcours par ON par.vil_num2=vil.vil_num WHERE par.vil_num1=:numVilleDepart

@@ -6,7 +6,7 @@ class FonctionManager{
 		$this->db = $db;
 	}
 
-	//Fonction qui permet de récupérer toutes les $listeFonction
+	//Fonction qui permet de récupérer toutes les fonctions
 	//présentes dans la base de données
 	public function getAllFonctions() {
 		$sql = 'SELECT fon_num, fon_libelle FROM fonction';

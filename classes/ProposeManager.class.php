@@ -43,9 +43,8 @@ class ProposeManager{
 		return $retour['par_num'];
 	}
 
-	/*
-	SELECT par.vil_num1 AS ville_depart, par.vil_num2 AS ville_arrivee, pro.pro_date, pro.pro_time, pro.pro_place, per.per_nom, per.per_prenom FROM propose pro JOIN parcours par ON par.par_num = pro.par_num JOIN personne per ON per.per_num=pro.per_num WHERE par.vil_num1=:vil_num1 AND par.vil_num2=:vil_num2 AND pro.pro_date BETWEEN :pro_date1 AND :pro_date2 AND pro.pro_time>:pro_time AND pro.pro_sens=:pro_sens
-	*/
+	//Cette fonction permet de récuperer tous les propositions de parcour entre deux villes
+	//pour une date et heure donnée
 	public function getAllPropositions($par_num, $pro_date, $precision, $pro_time, $pro_sens) {
 		$requete=$this->db->prepare(
 			'SELECT par.vil_num1 AS ville_depart, par.vil_num2 AS ville_arrivee, pro.pro_date, pro.pro_time, pro.pro_place, per.per_num as per_num, per.per_nom, per.per_prenom FROM propose pro

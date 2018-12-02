@@ -18,6 +18,8 @@ class AvisManager{
 		return $requete->execute();
 	}
 
+	//Cette fonction permet d'avoir la moyenne des avis
+	//laissé à une personne
 	public function getNoteAvis($per_num) {
 		$requete = $this->db->prepare(
 			'SELECT ROUND(AVG(avi_note), 1) as moyenne FROM avis
@@ -37,6 +39,8 @@ class AvisManager{
 		$requete->closeCursor();
 	}
 
+	//Cette fonction permet de récupérer le dernier
+	//commentaire laissé à une personne
 	public function getCommAvis($per_num) {
 		$requete = $this->db->prepare(
 			'SELECT avi_comm FROM avis
